@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
-from django.core.mail import send_mail
-from django.conf import settings
+
 # Create your views here.
 def register(request):
     if request.method=='POST':
@@ -11,21 +10,11 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            email=form.cleaned_data.get('email')
             messages.success(request, f'Account created for {username}')
-            subject = 'Welcome to Sreedhar blogs!'
-            message = f'Hi {username}, thank you for registering on Blogs account.'
-            email_from = settings.EMAIL_HOST_USER
-            recipient_list = [email,]
-            try:
-                send_mail(subject, message, email_from, recipient_list)
-            except Exception as e:
-                print(f"Error sending email: {e}")
             return redirect('login')
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form':form})
-
 
 @login_required
 def profile(request):
