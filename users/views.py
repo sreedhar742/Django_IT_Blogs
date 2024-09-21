@@ -5,6 +5,7 @@ from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.core.mail import send_mail
 from django.conf import settings
 # Create your views here.
+
 def register(request):
     if request.method=='POST':
         form = UserRegisterForm(request.POST)
@@ -13,7 +14,7 @@ def register(request):
             username = form.cleaned_data.get('username')
             email=form.cleaned_data.get('email')
             messages.success(request, f'Account created for {username}')
-            subject = 'Welcome to Sreedhar blogs!'
+            subject = 'Welcome to blogs!'
             message = f'Hi {username}, thank you for registering on Blogs account.'
             email_from = settings.EMAIL_HOST_USER
             recipient_list = [email,]
