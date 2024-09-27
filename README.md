@@ -14,9 +14,8 @@ In the main project directory, create a `.env` file and provide the following de
 3. DB_PASSWORD=your_db_password
 4. DB_HOST=localhost
 6. DB_PORT=3306
-
-EMAIL_HOST_USER=your_email
-EMAIL_HOST_PASSWORD=your_passkey
+7. EMAIL_HOST_USER=your_email
+8. EMAIL_HOST_PASSWORD=your_passkey
 ---
 
 ## Start the Application
