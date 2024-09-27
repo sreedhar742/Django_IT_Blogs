@@ -1,2 +1,3 @@
-*.js
-*.css
+__pycache__/
+*.pyc
+.env

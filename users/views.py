@@ -27,7 +27,7 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form':form})
 
-
+from django.contrib.auth.models import User
 @login_required
 def profile(request):
     if request.method=='POST':
@@ -37,6 +37,18 @@ def profile(request):
             u_form.save()
             p_form.save()
             messages.success(request, f'Your account has been updated!')
+            print(request.user)
+            user=User.objects.get(username=request.user)
+            username=user.username
+            email=user.email
+            subject="Your Profil is updated"
+            message=f'Mr.{username} your profile is updated changes done by you' 
+            email_from=settings.EMAIL_HOST_USER
+            recipient_list=[email]
+            try:
+                send_mail(subject,message,email_from,recipient_list)
+            except Exception as e:
+                print(f"Error sending email: {e}") 
             return redirect('profile')
     else:
         u_form = UserUpdateForm(instance=request.user)
