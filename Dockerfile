@@ -3,9 +3,9 @@ FROM python:3.10-slim
 # Set working directory
 WORKDIR /app
 
-# Install MySQL development libraries
+# Install MySQL development libraries and mysql-client
 RUN apt-get update && apt-get install -y \
-    default-libmysqlclient-dev build-essential \
+    default-libmysqlclient-dev build-essential default-mysql-client \
     && apt-get clean
 
 # Copy the application code into the container

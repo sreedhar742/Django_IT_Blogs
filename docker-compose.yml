@@ -1,3 +1,5 @@
+version: '3'
+
 services:
   web:
     build: .
@@ -5,27 +7,34 @@ services:
       - .:/app
     image: django_blogs:v1.0
     container_name: blogs_using_django
-    command: gunicorn django_project.wsgi:application --bind 0.0.0.0:8000 --forwarded-allow-ips='*'
+    command: python manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
     env_file: 
       - .env
     depends_on:
       - db
+    networks:
+      - django_network
 
   db:
-    image: mysql:5.7
+    image: mysql:8.0
     environment:
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: sreedhar  # Replace with your desired username
-      MYSQL_PASSWORD: 996330  # Replace with your desired password
-      MYSQL_ROOT_PASSWORD: 1234  # Keep this for root user access
-
-
+      MYSQL_DATABASE: blogs
+      MYSQL_USER: sreedhar  
+      MYSQL_PASSWORD: 996330
+      MYSQL_TCP_PORT: 3307
+      MYSQL_ROOT_PASSWORD: 1234
     volumes:
       - db_data:/var/lib/mysql
     ports:
-      - "3307:3306"
+      - "3307:3307"  
+    networks:
+      - django_network
 
 volumes:
   db_data:
+
+networks:
+  django_network:
+    driver: bridge
