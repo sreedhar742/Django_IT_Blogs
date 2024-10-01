@@ -5,9 +5,9 @@ services:
     build: .
     volumes:
       - .:/app
-    image: django_blogs:v1.0
-    container_name: blogs_using_django
-    command: python manage.py runserver 0.0.0.0:8000
+    image: blogs_of_django:v5.0
+    container_name: hell
+    command: sh -c "until mysqladmin ping -h db --silent; do sleep 1; done; gunicorn django_project.wsgi:application --bind 0.0.0.0:8000 --forwarded-allow-ips='*'"
     ports:
       - "8000:8000"
     env_file: 
@@ -21,14 +21,13 @@ services:
     image: mysql:8.0
     environment:
       MYSQL_DATABASE: blogs
-      MYSQL_USER: sreedhar  
+      MYSQL_USER: sreedhar
       MYSQL_PASSWORD: 996330
-      MYSQL_TCP_PORT: 3307
       MYSQL_ROOT_PASSWORD: 1234
     volumes:
       - db_data:/var/lib/mysql
     ports:
-      - "3307:3307"  
+      - "3307:3306"  # Map external port 3307 to internal port 3306
     networks:
       - django_network
 
