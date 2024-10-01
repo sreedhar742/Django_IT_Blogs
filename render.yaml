@@ -5,9 +5,10 @@ services:
     name: django-app
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn django_project.wsgi:application --bind 0.0.0.0:8080
+    buildcommand: pip install -r requirements.txt
+    startCommand: gunicorn django_project.wsgi:application --bind 0.0.00.:$PORT
     envVars:
+      PORT: ${PORT}
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
