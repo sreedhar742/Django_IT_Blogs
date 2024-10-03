@@ -25,15 +25,17 @@ services:
       MYSQL_PASSWORD: 996330
       MYSQL_ROOT_PASSWORD: 1234
     volumes:
-      - db_data:/var/lib/mysql
+      -db_data:/var/lib/mysql
     ports:
-      - "3307:3306"  # Map external port 3307 to internal port 3306
+      -3307:3306
     networks:
       - django_network
 
+
+
 volumes:
   db_data:
-
+  
 networks:
   django_network:
     driver: bridge
