@@ -58,11 +58,11 @@ services:
   db:
     image: mysql:8.0
     environment:
-      MYSQL_DATABASE: defaultdb
-      MYSQL_USER: avnadmin
-      MYSQL_PASSWORD: 996330
-      MYSQL_ROOT_PASSWORD: AVNS_wisGbxxzkzTuZ8OtLf0
-      MYSQL_HOST: mysql-1986e356-sreedhar742.k.aivencloud.com
+          MYSQL_DATABASE: ${DB_DATABASE}
+          MYSQL_USER: ${DB_USER}
+          MYSQL_PASSWORD: ${DB_USER_PASSWORD}
+          MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+          MYSQL_HOST: ${DB_HOST}
 
     volumes:
       - db_data:/var/lib/mysql  # Fixed syntax issue here
@@ -77,9 +77,3 @@ volumes:
 networks:
   django_network:
     driver: bridge
-#  environment:
-#       MYSQL_DATABASE: ${DB_DATABASE}
-#       MYSQL_USER: ${DB_USER}
-#       MYSQL_PASSWORD: ${DB_USER_PASSWORD}
-#       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-#       MYSQL_HOST: ${DB_HOST}
