@@ -1,6 +1,33 @@
 {% extends 'blog/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
+<style>
+    .sidebars {
+        display: flex;
+        flex-direction: column; 
+        align-items: flex-end; 
+        position: fixed; 
+        bottom: 275px;
+        left: 1150px;
+      }
+    
+    .box {
+        width: 150px;
+        margin: 10px;
+        padding: 10px;
+        background-color: white;
+        text-align: center;
+        border: 5px groove #ccc;
+        border-radius:1.0em;
+        box-sizing: border-box;
+        
+    }
+    .box:hover {
+      background: linear-gradient(powderblue,green);
+      box-shadow: 2px 2px 10px 10px blue;
+      transition: box-shadow 0.3s ease; 
+  }
+</style>
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
@@ -25,6 +52,11 @@
                         <button type="submit" class="btn btn-outline-info mb-2">Update</button>
                     </div>
                 </form>
+            </div>
+            <div class="sidebars">
+                <a href="https://www.linkedin.com/in/sreedhar742" class="box"><h5>linkedin</h5></a>
+                <a href="https://github.com/sreedhar742/Django_IT_Blogs" class="box"><h5>github</h5></a>
+                <a href="https://pridhar742@gmail.com" class="box"><h5>email</h5></a>
             </div>
         </div>
     </div>
