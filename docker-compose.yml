@@ -1,41 +1,3 @@
-version: '3'
-
-services:
-  web:
-    build: .
-    volumes:
-      - .:/app
-    image: blogs_of_django:v5.0
-    container_name: hell
-    command: sh -c "until mysqladmin ping -h db --silent; do sleep 1; done; gunicorn django_project.wsgi:application --bind 0.0.0.0:8000 --forwarded-allow-ips='*'"
-    ports:
-      - "8000:8000"
-    env_file: 
-      - .env
-    depends_on:
-      - db
-    networks:
-      - django_network
-
-  db:
-    image: mysql:8.0
-    env_file: 
-      - .env
-    volumes:
-      - db_data:/var/lib/mysql
-    ports:
-      - "3307:3306"
-    networks:
-      - django_network
-
-volumes:
-  db_data:
-
-networks:
-  django_network:
-    driver: bridge
-
-
 # version: '3'
 
 # services:
@@ -57,13 +19,10 @@ networks:
 
 #   db:
 #     image: mysql:8.0
-#     environment:
-#       MYSQL_DATABASE: blogs
-#       MYSQL_USER: sreedhar
-#       MYSQL_PASSWORD: 996330
-#       MYSQL_ROOT_PASSWORD: 1234
+#     env_file: 
+#       - .env
 #     volumes:
-#       - db_data:/var/lib/mysql  # Fixed syntax issue here
+#       - db_data:/var/lib/mysql
 #     ports:
 #       - "3307:3306"
 #     networks:
@@ -71,7 +30,50 @@ networks:
 
 # volumes:
 #   db_data:
-  
+
 # networks:
 #   django_network:
 #     driver: bridge
+
+
+version: '3'
+
+services:
+  web:
+    build: .
+    volumes:
+      - .:/app
+    image: blogs_of_django:v5.0
+    container_name: hell
+    command: sh -c "until mysqladmin ping -h db --silent; do sleep 1; done; gunicorn django_project.wsgi:application --bind 0.0.0.0:8000 --forwarded-allow-ips='*'"
+    ports:
+      - "8000:8000"
+    env_file: 
+      - .env
+    depends_on:
+      - db
+    networks:
+      - django_network
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: defaultdb
+      MYSQL_USER: avnadmin
+      MYSQL_PASSWORD: 996330
+      MYSQL_ROOT_PASSWORD: AVNS_wisGbxxzkzTuZ8OtLf0
+      MYSQL_HOST: mysql-1986e356-sreedhar742.k.aivencloud.com
+
+    volumes:
+      - db_data:/var/lib/mysql  # Fixed syntax issue here
+    ports:
+      - "10105:3306"
+    networks:
+      - django_network
+
+volumes:
+  db_data:
+  
+networks:
+  django_network:
+    driver: bridge
