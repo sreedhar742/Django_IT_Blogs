@@ -1,0 +1,75 @@
+
+.navbar {
+  background: linear-gradient(blue,red);
+  color:transparent;
+  background-clip:text;
+  padding:1rem;
+}
+
+.navbar .nav-link {
+  color: white !important;
+}
+
+.navbar .nav-link.active {
+  color: #ddd !important;
+}
+
+.button {
+  border: 3px groove white;
+  border-width: 5px;
+  border-radius: 30%;
+  
+  margin:5px;
+  width:100px;
+  text-align:center;
+}
+
+.footer {
+  background: linear-gradient(blue,red);
+ color:transparent;
+ background-clip:text;
+  color: black;
+  padding: 1rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.button:hover{
+  background:linear-gradient(powderblue,blue);
+}
+
+.sidebars {
+  display: flex;
+  flex-direction: row; 
+  align-items: flex-end; 
+  position: fixed; 
+  bottom: 150px;
+  left: 700px;
+}
+
+.box {
+  width: 150px;
+  margin: 10px;
+  padding: 10px;
+  background-color: white;
+  text-align: center;
+  border: 5px groove #ccc;
+  border-radius:1.0em;
+  box-sizing: border-box;
+  
+}
+.box:hover {
+background: linear-gradient(powderblue,blue);
+box-shadow: 2px 2px 10px 10px blue;
+transition: box-shadow 0.3s ease; 
+}
+
+.newtitle{
+font-size:35px;
+background: linear-gradient(blue,red);
+color:transparent;
+background-clip:text;
+
+}
