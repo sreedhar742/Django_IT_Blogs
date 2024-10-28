@@ -25,4 +25,5 @@ RUN python manage.py collectstatic --noinput
 EXPOSE 8000
 
 # Command to start the application
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "django_project.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--log-level", "debug", "django_project.wsgi:application"]
+
