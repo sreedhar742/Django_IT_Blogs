@@ -1,3 +1,4 @@
+# Use the official Python 3.10-slim image
 FROM python:3.10-slim
 
 # Set the working directory
@@ -17,14 +18,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the project files
 COPY . .
 
-# Copy the .env file
-COPY .env .
-
 # Collect static files
 RUN python manage.py collectstatic --noinput
 
-# Expose the port
+# Expose the application port
 EXPOSE 8000
 
-# Command to run the application
+# Command to start the application
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "django_project.wsgi:application"]
