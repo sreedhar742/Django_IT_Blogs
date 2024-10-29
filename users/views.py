@@ -58,3 +58,50 @@ def profile(request):
         'p_form':p_form
     }
     return render(request, 'users/profile.html', context)
+
+
+
+# @login_required
+# def profile(request):
+#     if request.method == 'POST':
+#         u_form = UserUpdateForm(request.POST, instance=request.user)
+#         p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+#         if u_form.is_valid() and p_form.is_valid():
+#             # Save user information
+#             u_form.save()
+            
+#             # Handle the image data
+#             if p_form.cleaned_data['image_data']:
+#                 # Read the uploaded image as bytes and save it
+#                 image_file = p_form.cleaned_data['image_data']
+#                 request.user.profile.image_data = image_file.read()  # Store as binary
+#             else:
+#                 # If no new image is provided, keep the existing one
+#                 request.user.profile.image_data = request.user.profile.image_data
+            
+#             request.user.profile.save()  # Save the profile
+            
+#             messages.success(request, f'Your account has been updated!')
+            
+#             # Send email notification about the profile update
+#             username = request.user.username
+#             email = request.user.email
+#             subject = "Your Profile is updated"
+#             message = f'Mr. {username}, your profile is updated with changes made by you.'
+#             email_from = settings.EMAIL_HOST_USER
+#             recipient_list = [email]
+#             try:
+#                 send_mail(subject, message, email_from, recipient_list)
+#             except Exception as e:
+#                 print(f"Error sending email: {e}")
+                
+#             return redirect('profile')
+#     else:
+#         u_form = UserUpdateForm(instance=request.user)
+#         p_form = ProfileUpdateForm(instance=request.user.profile)
+
+#     context = {
+#         'u_form': u_form,
+#         'p_form': p_form
+#     }
+#     return render(request, 'users/profile.html', context)

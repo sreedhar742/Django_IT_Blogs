@@ -20,3 +20,18 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['image']
+        
+        
+# class ProfileUpdateForm(forms.ModelForm):
+#     class Meta:
+#         model = Profile
+#         fields = ['image_data']  # Change 'image' to 'image_data'
+
+#     def save(self, *args, **kwargs):
+#         profile = super().save(commit=False)
+#         if self.cleaned_data['image_data']:
+#             # Read the uploaded image as bytes
+#             image_file = self.cleaned_data['image_data']
+#             profile.image_data = image_file.read()
+#         profile.save()
+#         return profile
