@@ -110,3 +110,11 @@ def about(request):
     return render(request, 'blog/about.html')
 
 
+
+from rest_framework import viewsets
+
+from .serializer import Postserializer
+class Postviewset(viewsets.ModelViewSet):
+    queryset=Post.objects.all()
+    serializer_class=Postserializer
+    

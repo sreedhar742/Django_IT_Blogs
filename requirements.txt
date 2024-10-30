@@ -5,3 +5,4 @@ django-crispy-forms==2.0.0
 crispy-bootstrap5==2023.10  
 django-environ==0.8.1  
 mysqlclient==2.1.0  
+djangorestframework==3.14.0

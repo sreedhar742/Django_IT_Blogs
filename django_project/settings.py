@@ -29,8 +29,7 @@ environ.Env.read_env()
 SECRET_KEY = 'django-insecure-v%@#)^()f04%m7w!)k!047c0mi)jou#d=_*o_e5h1p3=m+@yv('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
@@ -47,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
