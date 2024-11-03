@@ -8,6 +8,7 @@ from .models import Post
 
 from django.conf import settings
 from django.core.mail import send_mail
+from .tasks import sending_email
 
 def home(request):
     context = {'posts' : Post.objects.all() }
@@ -46,11 +47,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         message = f'Hi {username}, thank you for using and new content on your profile.'
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [email,]
-        try:
-            send_mail(subject, message, email_from, recipient_list)
-            print("mail sent succcessfully")
-        except Exception as e:
-            print(f"Error sending email: {e}")
+        sending_email.delay(message, subject, email_from, recipient_list)
         return super().form_valid(form)
 
 

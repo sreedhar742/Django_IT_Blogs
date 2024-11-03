@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'blog.apps.BlogConfig',
     'crispy_forms',
+    'django_celery_beat',
+    'django_celery_results',
     "crispy_bootstrap5",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,6 +53,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -137,7 +140,7 @@ STATICFILES_DIRS=[
 ]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/') 
 MEDIA_URL = 'media/'
 
 # Default primary key field type
@@ -158,3 +161,11 @@ EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True') == 'True'  # Convert str
 EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))                # Default to 587
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')                # Email user
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')        # Email password
+
+from decouple import config
+
+# Celery settings
+CELERY_BROKER_URL = config('CELERY_BROKER_REDIS_URL', default='redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = 'django-db'  # Use 'django-db' to store results in the Django database
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'  # For scheduling tasks in Django admin
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
